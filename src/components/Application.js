@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import DayList from "./DayList";
+import "components/Appointment"
 
 import "components/Application.scss";
+import Appointment from "components/Appointment";
 
 const days = [
   {
@@ -21,9 +23,56 @@ const days = [
   },
 ];
 
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer:{
+        id: 3,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+  {
+    id: 3,
+    time: "2pm",
+  },
+  {
+    id: 4,
+    time: "3pm",
+    interview: {
+      student: "Archie Andrews",
+      interviewer:{
+        id: 4,
+        name: "Cohana Roy",
+        avatar: "https://i.imgur.com/FK8V841.jpg",
+      }
+    }
+  },
+  {
+    id: 5,
+    time: "4pm",
+  }
+];
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+
+  const appointmentMap = appointments.map(appointment => {
+    return (
+      <Appointment 
+        key={appointment.id} 
+        {...appointment}
+      />
+    );
+  })
 
   return (
     <main className="layout">
@@ -37,8 +86,8 @@ export default function Application(props) {
         <nav className="sidebar__menu">
           <DayList
             days={days}
-            day={day}
-            setDay={setDay}
+            value={day}
+            onChange={setDay}
           />
         </nav>
         <img
@@ -47,7 +96,8 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />  
       </section>
-      <section className="schedule">
+      <section className="schedule" >
+        <ul>{appointmentMap}</ul>
       </section>
     </main>
   );

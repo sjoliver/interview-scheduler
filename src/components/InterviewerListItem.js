@@ -1,32 +1,22 @@
-import React, { useState }  from "react";
+import React from "react";
 import classNames from "classnames";
 import "components/InterviewerListItem.scss"
 
 export default function InterviewerListItem(props) {
-
-  const { id, name, avatar, selected } = props;
-  const [interviewer, setInterviewer] = useState(0);
+  const { name, avatar, selected, setInterviewer } = props;
   
   const interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": selected
   })
 
-  const displayName = function() {
-    if (selected) {
-      return name;
-    }
-  }
-
-  const displayedName = displayName();
-
   return (
-    <li className={interviewerClass} onClick={() => setInterviewer(id)}>
+    <li className={interviewerClass} onClick={setInterviewer}>
       <img
         className="interviewers__item-image"
         src={avatar}
         alt={name}
       />
-      {displayedName}
+      {selected && name}
     </li>
   );
   
