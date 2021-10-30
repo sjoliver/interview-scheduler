@@ -5,7 +5,7 @@ import Empty from "./Empty";
 import "./styles.scss"
 
 export default function Appointment(props) {
-  const { id, time, interview } = props;
+  const { time, interview } = props;
 
   return (
     <article className="appointment">
