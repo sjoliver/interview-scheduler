@@ -19,3 +19,18 @@ export function getAppointmentsForDay(state, day) {
   return result
 
 }
+
+export function getInterview(state, interview) {
+
+  if (interview === null) {
+    return null
+  } 
+
+  let interviewData = {}
+
+  interviewData["student"] = interview.student
+  interviewData["interviewer"] = state.interviewers[interview.interviewer]
+
+  return interviewData
+
+}
