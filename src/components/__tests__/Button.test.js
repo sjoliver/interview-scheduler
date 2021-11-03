@@ -8,7 +8,7 @@ it("renders without crashing", () => {
   render(<Button />);
 });
 
-it.skip("renders its `children` prop as text", () => {
+it("renders its `children` prop as text", () => {
   const { getByText } = render(<Button>Default</Button>);
   expect(getByText("Default")).toBeInTheDocument();
 });
