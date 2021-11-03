@@ -34,7 +34,7 @@ export default function useApplicationData() {
     
     return axios.put(`/api/appointments/${id}`, {interview})
     .then((response) => {
-        const days = updateSpots(state, false);
+        const days = updateSpots(state, false, id);
         setState({...state, appointments, days})
       }).catch((err) => console.log(err))
   };
@@ -51,13 +51,13 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`)
       .then((response) => {
-        const days = updateSpots(state, true);
+        const days = updateSpots(state, true, id);
         setState({...state, appointments, days});
       }).catch((err) => console.log(err))
   };
 
   // What are we trying to do? Update days[day].spots (spots for a certain day)
-  function updateSpots(state, cancelInterview) {
+  function updateSpots(state, cancelInterview, id) {
     const { day, days, appointments } = state;
     
     // find the correct day object, inside the days array (array of day objects)
@@ -76,14 +76,13 @@ export default function useApplicationData() {
     
     if (cancelInterview) {
       spots++;
-    } else {
+    } else if (!cancelInterview && appointments[id].interview === null) {
       spots--;
     }
 
     // update days[day].spots
     const newDay = {...foundDay, spots} 
     const newDays = days.map(dayElm => dayElm.name === day ? newDay : dayElm)
-    
     
     return newDays;
   }
