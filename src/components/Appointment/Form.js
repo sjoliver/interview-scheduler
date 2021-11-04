@@ -30,6 +30,8 @@ export default function Form(props) {
       return;
     }
 
+    // clear the error on successful submission
+    setError("");
     onSave(student, interviewer);
   }
 
