@@ -36,7 +36,7 @@ export default function useApplicationData() {
     .then((response) => {
         const days = updateSpots(state, false, id);
         setState({...state, appointments, days})
-      }).catch((err) => console.log(err))
+      })
   };
 
   function cancelInterview(id) {
@@ -53,7 +53,7 @@ export default function useApplicationData() {
       .then((response) => {
         const days = updateSpots(state, true, id);
         setState({...state, appointments, days});
-      }).catch((err) => console.log(err))
+      })
   };
 
   // What are we trying to do? Update days[day].spots (spots for a certain day)
